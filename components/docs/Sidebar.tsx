@@ -1,122 +1,63 @@
-import { useState } from 'react'
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { ChevronDown, ChevronRight, Book, Code, Palette, Cog, Zap, Layers, Database, Shield, Cloud, Headphones } from 'lucide-react'
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Book, FileText, Clipboard, DollarSign, Cloud, ChevronRight, ChevronDown } from "lucide-react";
 
-interface NavItem {
-  title: string
-  href: string
-  icon?: React.ReactNode
-  children?: NavItem[]
-}
-
-const navItems: NavItem[] = [
+const navItems = [
   {
-    title: "Getting Started",
+    title: "getting started",
     href: "#getting-started",
     icon: <Book className="h-4 w-4" />,
     children: [
-      { title: "Installation", href: "#installation" },
-      { title: "Quick Start Guide", href: "#quick-start-guide" },
-      { title: "Project Structure", href: "#project-structure" },
+      { title: "installation", href: "#installation" },
+      { title: "quick start guide", href: "#quick-start-guide" },
     ],
   },
   {
-    title: "Core Concepts",
-    href: "#core-concepts",
-    icon: <Layers className="h-4 w-4" />,
+    title: "document types",
+    href: "#document-types",
+    icon: <FileText className="h-4 w-4" />,
     children: [
-      { title: "Components", href: "#components" },
-      { title: "State Management", href: "#state-management" },
-      { title: "Routing", href: "#routing" },
+      { title: "invoices", href: "#invoices" },
+      { title: "bills", href: "#bills" },
+      { title: "receipts", href: "#receipts" },
     ],
   },
   {
-    title: "UI Components",
-    href: "#ui-components",
-    icon: <Palette className="h-4 w-4" />,
+    title: "features",
+    href: "#features",
+    icon: <Clipboard className="h-4 w-4" />,
     children: [
-      { title: "Buttons", href: "#buttons" },
-      { title: "Forms", href: "#forms" },
-      { title: "Modals", href: "#modals" },
-      { title: "Tables", href: "#tables" },
+      { title: "multi-currency support", href: "#multi-currency-support" },
+      { title: "tax handling", href: "#tax-handling" },
+      { title: "email integration", href: "#email-integration" },
     ],
   },
   {
-    title: "API Reference",
-    href: "#api-reference",
-    icon: <Code className="h-4 w-4" />,
-    children: [
-      { title: "HTTP Requests", href: "#http-requests" },
-      { title: "WebSocket", href: "#websocket" },
-      { title: "GraphQL", href: "#graphql" },
-    ],
+    title: "pricing",
+    href: "#pricing",
+    icon: <DollarSign className="h-4 w-4" />,
   },
   {
-    title: "State Management",
-    href: "#state-management",
-    icon: <Database className="h-4 w-4" />,
-    children: [
-      { title: "Redux", href: "#redux" },
-      { title: "MobX", href: "#mobx" },
-      { title: "Context API", href: "#context-api" },
-    ],
-  },
-  {
-    title: "Styling",
-    href: "#styling",
-    icon: <Palette className="h-4 w-4" />,
-    children: [
-      { title: "CSS Modules", href: "#css-modules" },
-      { title: "Styled Components", href: "#styled-components" },
-      { title: "Tailwind CSS", href: "#tailwind-css" },
-    ],
-  },
-  {
-    title: "Performance Optimization",
-    href: "#performance-optimization",
-    icon: <Zap className="h-4 w-4" />,
-    children: [
-      { title: "Code Splitting", href: "#code-splitting" },
-      { title: "Lazy Loading", href: "#lazy-loading" },
-      { title: "Memoization", href: "#memoization" },
-    ],
-  },
-  {
-    title: "Testing",
-    href: "#testing",
-    icon: <Shield className="h-4 w-4" />,
-    children: [
-      { title: "Unit Testing", href: "#unit-testing" },
-      { title: "Integration Testing", href: "#integration-testing" },
-      { title: "End-to-End Testing", href: "#end-to-end-testing" },
-    ],
-  },
-  {
-    title: "Deployment",
+    title: "deployment",
     href: "#deployment",
     icon: <Cloud className="h-4 w-4" />,
-    children: [
-      { title: "Build Process", href: "#build-process" },
-      { title: "Continuous Integration", href: "#continuous-integration" },
-      { title: "Hosting Options", href: "#hosting-options" },
-    ],
   },
-  {
-    title: "Advanced Topics",
-    href: "#advanced-topics",
-    icon: <Cog className="h-4 w-4" />,
-    children: [
-      { title: "Server-Side Rendering", href: "#server-side-rendering" },
-      { title: "Internationalization", href: "#internationalization" },
-      { title: "Accessibility", href: "#accessibility" },
-    ],
-  },
-]
+];
 
-function NavItem({ item, isChild = false }: { item: NavItem; isChild?: boolean }) {
-  const [isOpen, setIsOpen] = useState(false)
+interface NavItemProps {
+  item: {
+    title: string;
+    href: string;
+    icon?: JSX.Element;
+    children?: { title: string; href: string }[];
+  };
+  isChild?: boolean;
+}
+
+function NavItem({ item, isChild = false }: NavItemProps) {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -143,13 +84,13 @@ function NavItem({ item, isChild = false }: { item: NavItem; isChild?: boolean }
       </Button>
       {isOpen && item.children && (
         <div className="ml-4">
-          {item.children.map((child) => (
+          {item.children.map((child: { title: string; href: string }) => (
             <NavItem key={child.href} item={child} isChild />
           ))}
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export function Sidebar() {
@@ -163,6 +104,5 @@ export function Sidebar() {
         </div>
       </ScrollArea>
     </div>
-  )
+  );
 }
-
