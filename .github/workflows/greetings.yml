@@ -1,4 +1,4 @@
-name: Greetings
+name: greetings
 
 on: [pull_request_target, issues]
 
@@ -12,5 +12,5 @@ jobs:
     - uses: actions/first-interaction@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: "Message that will be displayed on users' first issue"
-        pr-message: "Message that will be displayed on users' first pull request"
+        issue-message: "hello! 👋 welcome to my repository. i'm excited to have you here! if you have any questions or need help, feel free to reach out. 😊"
+        pr-message: "thank you for your pull request! 🎉 i appreciate your contribution and look forward to reviewing your changes. if you need anything, just let me know. 🙌"
