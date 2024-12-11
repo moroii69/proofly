@@ -1,5 +1,4 @@
 'use client';
-import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -13,19 +12,6 @@ const docSections = [
 ];
 
 export default function DocsPage() {
-  useEffect(() => {
-    // Check if we are on the client-side (browser)
-    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
-      // Redirect to docs.proofly.xyz when in production
-      window.location.href = "https://docs.proofly.xyz";
-    }
-  }, []);
-
-  // Render docs content during development or on client-side
-  if (typeof window === 'undefined') {
-    return null; // or you can show a loading indicator while server-side
-  }
-
   return (
     <div className="container mx-auto py-12">
       <h1 className="text-3xl font-bold mb-8 text-center">Documentation</h1>
