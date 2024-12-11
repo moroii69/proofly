@@ -1,5 +1,6 @@
 'use client';
 import { useEffect } from "react";
+import { useRouter } from 'next/router'; // Import the useRouter hook
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -13,13 +14,14 @@ const docSections = [
 ];
 
 export default function DocsPage() {
+  const router = useRouter();
+
   useEffect(() => {
-    // Check if we are in production or a local dev environment
     if (process.env.NODE_ENV === 'production') {
-      // Redirect to docs.proofly.xyz when in production
-      window.location.href = "https://docs.proofly.xyz";
+      // Redirect to docs.proofly.xyz in production using router.push
+      router.push("https://docs.proofly.xyz");
     }
-  }, []);
+  }, [router]);
 
   // Render docs content during development
   return (
