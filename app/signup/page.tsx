@@ -4,16 +4,21 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { 
+  createUserWithEmailAndPassword, 
+  GoogleAuthProvider, 
+  GithubAuthProvider, 
+  signInWithPopup 
+} from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Github, Chrome } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/hooks/use-auth"; // Adjust the import path as needed
+import { useAuth } from "@/hooks/use-auth";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -28,7 +33,7 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
-  const { user } = useAuth(); // Use the AuthContext
+  const { user } = useAuth();
 
   const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,9 +41,63 @@ export default function SignUpPage() {
 
   // If user is already logged in, redirect to dashboard or home
   if (user) {
-    router.replace('/docs'); // or wherever you want to redirect logged-in users
+    router.replace('/docs');
     return null;
   }
+
+  const handleSocialSignUp = async (provider: 'google' | 'github') => {
+    try {
+      setIsLoading(true);
+      
+      const authProvider = provider === 'google' 
+        ? new GoogleAuthProvider() 
+        : new GithubAuthProvider();
+      
+      const userCredential = await signInWithPopup(auth, authProvider);
+      
+      toast({
+        title: "Success",
+        description: `Signed up with ${provider} successfully`,
+      });
+
+      // Multiple redirection attempts
+      router.push('/docs');
+      
+      // Fallback redirection
+      setTimeout(() => {
+        window.location.href = '/docs';
+      }, 100);
+
+    } catch (error) {
+      const firebaseError = error as { code?: string, message?: string };
+      
+      let errorMessage = `Could not sign up with ${provider}`;
+      switch (firebaseError.code) {
+        case 'auth/account-exists-with-different-credential':
+          errorMessage = "Email already exists with a different provider";
+          break;
+        case 'auth/popup-blocked':
+          errorMessage = "Popup was blocked. Please enable popups.";
+          break;
+        case 'auth/popup-closed-by-user':
+          errorMessage = "Sign-up popup was closed";
+          return; // Don't show toast if user deliberately closed popup
+      }
+
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+
+      console.error(`${provider.toUpperCase()} Signup error:`, {
+        code: firebaseError.code,
+        message: firebaseError.message
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
@@ -154,6 +213,25 @@ export default function SignUpPage() {
             {isLoading ? "Loading..." : "Sign Up"}
           </Button>
         </form>
+
+        <div className="flex space-x-2 mt-4">
+          <Button 
+            variant="outline" 
+            className="w-1/2" 
+            onClick={() => handleSocialSignUp('google')}
+            disabled={isLoading}
+          >
+            <Chrome className="mr-2 h-4 w-4" /> Google
+          </Button>
+          <Button 
+            variant="outline" 
+            className="w-1/2" 
+            onClick={() => handleSocialSignUp('github')}
+            disabled={isLoading}
+          >
+            <Github className="mr-2 h-4 w-4" /> GitHub
+          </Button>
+        </div>
 
         <div className="text-center text-sm text-muted-foreground mt-4">
           Already have an account?{" "}

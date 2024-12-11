@@ -39,7 +39,7 @@ export default function RootLayout({
           </AuthProvider>
         </ThemeProvider>
         <Analytics />
-        <SpeedInsights /> {/* Add this here */}
+        <SpeedInsights />
       </body>
     </html>
   );
