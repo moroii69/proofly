@@ -60,7 +60,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-              Generate Professional Invoices, Bills, and Receipts Effortlessly
+              Effortlessly Create Invoices, Bills & Receipts
             </h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
               Create, customize, and manage receipts for your business in minutes with
