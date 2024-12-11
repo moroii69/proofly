@@ -12,6 +12,15 @@ const nextConfig = {
     };
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/docs', // the page that has to be redirected
+        destination: 'https://docs.proofly.xyz', // the destination URL
+        permanent: true, // permanent 301 redirect
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
