@@ -1,5 +1,7 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+'use client';
+import { useEffect } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const docSections = [
   { title: "Getting Started", href: "/docs/getting-started" },
@@ -8,9 +10,18 @@ const docSections = [
   { title: "Styling", href: "/docs/styling" },
   { title: "Exporting", href: "/docs/exporting" },
   { title: "API Reference", href: "/docs/api" },
-]
+];
 
 export default function DocsPage() {
+  useEffect(() => {
+    // Check if we are in production or a local dev environment
+    if (process.env.NODE_ENV === 'production') {
+      // Redirect to docs.proofly.xyz when in production
+      window.location.href = "https://docs.proofly.xyz";
+    }
+  }, []);
+
+  // Render docs content during development
   return (
     <div className="container mx-auto py-12">
       <h1 className="text-3xl font-bold mb-8 text-center">Documentation</h1>
@@ -32,6 +43,5 @@ export default function DocsPage() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
-
