@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Receipt, Shield, Globe, Mail } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useAuth } from "@/hooks/use-auth"; 
 
 const features = [
   {
@@ -30,10 +31,10 @@ const features = [
 
 export default function Home() {
   const [showScrollHint, setShowScrollHint] = useState(true);
+  const { user, loading } = useAuth(); // Access the user and loading state from context
 
   useEffect(() => {
     const handleScroll = () => {
-      // Hide the text if user scrolls more than 50px
       setShowScrollHint(window.scrollY < 50);
     };
 
@@ -47,6 +48,14 @@ export default function Home() {
     const featuresSection = document.getElementById('features');
     featuresSection?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Return a loading state if authentication is still in progress
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Set the redirect path based on the user's authentication status
+  const redirectPath = user ? "/dashboard" : "/signup";
 
   return (
     <main className="flex min-h-screen flex-col z-10 relative">
@@ -77,12 +86,12 @@ export default function Home() {
                 className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
                 asChild
               >
-                <Link href="/docs">
+                <Link href={redirectPath}>
                   Start Generating <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <Link href="/how-it-works">Learn more</Link>
+                <Link href="/docs">Learn more</Link>
               </Button>
             </motion.div>
           </motion.div>

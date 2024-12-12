@@ -55,7 +55,7 @@ export default function LoginPage() {
             description: "Signed in successfully with Magic Link",
           });
 
-          router.push('/docs');
+          router.push('/dashboard');
         }
       }
     } catch (error) {
@@ -87,11 +87,11 @@ export default function LoginPage() {
       });
 
       // Redirect to dashboard
-      router.push('/docs');
+      router.push('/dashboard');
       
       // Fallback redirection
       setTimeout(() => {
-        window.location.href = '/docs';
+        window.location.href = '/dashboard';
       }, 100);
 
     } catch (error) {

@@ -41,7 +41,7 @@ export default function SignUpPage() {
 
   // If user is already logged in, redirect to dashboard or home
   if (user) {
-    router.replace('/docs');
+    router.replace('/dashboard');
     return null;
   }
 
@@ -61,11 +61,11 @@ export default function SignUpPage() {
       });
 
       // Multiple redirection attempts
-      router.push('/docs');
+      router.push('/dashboard');
       
       // Fallback redirection
       setTimeout(() => {
-        window.location.href = '/docs';
+        window.location.href = '/dashboard';
       }, 100);
 
     } catch (error) {
@@ -113,11 +113,11 @@ export default function SignUpPage() {
       });
 
       // Multiple redirection attempts
-      router.push('/docs');
+      router.push('/dashboard');
       
       // Fallback redirection
       setTimeout(() => {
-        window.location.href = '/docs';
+        window.location.href = '/dashboard';
       }, 100);
 
     } catch (error) {

@@ -1,7 +1,6 @@
 "use client";
 import { useState } from 'react';
 import axios from 'axios';
-import { Toaster, toast } from 'react-hot-toast';
 
 export default function InvoiceGeneratorPage() {
   const [formData, setFormData] = useState({
@@ -50,10 +49,10 @@ export default function InvoiceGeneratorPage() {
       
       const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
       setInvoiceUrl(url);
-      toast.success('PDF Generated Successfully!');
     } catch (err) {
-      console.error('Full error:', err);
+      console.error('Full error:', err);  // Log full error for debugging
       if (axios.isAxiosError(err)) {
+        // Try to parse error response
         const errorText = await err.response?.data?.text();
         setError(errorText || err.response?.data?.message || 'An error occurred while generating the invoice');
       } else {
@@ -64,22 +63,8 @@ export default function InvoiceGeneratorPage() {
     }
   };
 
-  const downloadInvoice = () => {
-    if (invoiceUrl) {
-      const link = document.createElement('a');
-      link.href = invoiceUrl;
-      link.download = 'invoice.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
-
-  
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <Toaster position="top-right" reverseOrder={false} />
-      
       <h1 className="text-3xl font-bold mb-6 text-center">Invoice Generator</h1>
 
       {error && (
@@ -321,16 +306,6 @@ export default function InvoiceGeneratorPage() {
         >
           {isLoading ? 'Generating Invoice...' : 'Generate Invoice'}
         </button>
-
-        {invoiceUrl && (
-          <button 
-            type="button"
-            onClick={downloadInvoice}
-            className="w-full mt-4 py-3 rounded-md text-white bg-green-500 hover:bg-green-600"
-          >
-            Download Invoice
-          </button>
-        )}
       </form>
     </div>
   );
