@@ -13,16 +13,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
-// import the helix loader
-import { helix } from "ldrs";
-
-helix.register();
-
-// const metadata = {
-//   title: "Proofly - Professional Invoices & Bills",
-//   description:
-//     "Create, customize, and manage receipts for your business with our powerful receipt generator.",
-// };
+// Lazy load the helix loader registration
+let helix: any;
+if (typeof window !== "undefined") {
+  helix = require("ldrs").helix;
+  helix.register();
+}
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,7 +48,9 @@ export default function RootLayout({
             <div className="min-h-screen bg-background relative">
               {isLoading && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
-                  <l-helix size="45" speed="2.5" color="white"></l-helix>
+                  {typeof window !== "undefined" && (
+                    <l-helix size="45" speed="2.5" color="white"></l-helix>
+                  )}
                 </div>
               )}
               <Navbar />
