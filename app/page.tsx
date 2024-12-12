@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Receipt, Shield, Globe, Mail } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useAuth } from "@/hooks/use-auth"; 
+import { useAuth } from "@/hooks/use-auth";
 
 const features = [
   {
