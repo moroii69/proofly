@@ -32,7 +32,7 @@ export default function RootLayout({
 
   useEffect(() => {
     setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 1500); // 1.5 seconds delay
+    const timer = setTimeout(() => setIsLoading(false), 0.7); // approx 1 second delay
 
     return () => clearTimeout(timer);
   }, [pathname]);
