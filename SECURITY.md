@@ -2,49 +2,62 @@
 
 ## Overview
 
-This project, **Proofly**, is a versatile receipt generator offering invoice creation, tax calculations, multi-currency support, PDF exports, bulk generation, and barcode integration. The project ensures data security and protects sensitive information during interactions.
+**Proofly** is a robust receipt generator designed to offer professional-grade features, including invoice creation, tax calculations, multi-currency support, PDF exports, bulk generation, and barcode integration. Data security is a cornerstone of this project, ensuring sensitive information is protected throughout all interactions.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in this project, please follow these steps:
+To maintain the integrity of the project, we encourage responsible disclosure of any security vulnerabilities. If you identify an issue, please follow the steps below:
 
-1. **Do not disclose the issue publicly.** Instead, contact the repository maintainers directly.
-2. Open an issue on the repository or send an email to **kurosen930@gmail.com**.
-3. Provide clear steps to reproduce and any potential fixes or patches.
+1. **Do not disclose the vulnerability publicly.**  
+   Instead, contact the maintainers directly to ensure a prompt resolution.
+
+2. **Submit a report:**  
+   - Open an issue on the repository (mark it as sensitive if possible).  
+   - Alternatively, send an email to **kurosen930@gmail.com**.  
+
+3. **Include details:**  
+   Provide clear steps to reproduce the vulnerability, its potential impact, and any suggested patches or fixes.
 
 ## Code Security
 
-We prioritize secure coding practices to mitigate common vulnerabilities, such as:
+We adhere to best practices in secure software development, implementing measures to mitigate common vulnerabilities:
 
-- **Injection Attacks**: All input data is sanitized before processing.
-- **Cross-Site Scripting (XSS)**: User input is escaped to prevent XSS.
-- **Cross-Site Request Forgery (CSRF)**: Security tokens are used to prevent CSRF attacks.
+- **Injection Attacks:** Input data is rigorously sanitized before processing.  
+- **Cross-Site Scripting (XSS):** All user inputs are escaped to prevent execution of malicious scripts.  
+- **Cross-Site Request Forgery (CSRF):** Security tokens are integrated to safeguard against CSRF attacks.
 
-## Dependencies
+## Dependency Management
 
-This project uses third-party libraries. Ensure that these dependencies are up-to-date and monitor for any vulnerabilities.
+The project relies on third-party libraries. To maintain security, we recommend:
 
-- Use **npm audit** to check for outdated or insecure dependencies.
-- Follow security updates for all dependencies and apply patches as needed.
+- Running `npm audit` regularly to identify and resolve any vulnerabilities in dependencies.
+- Monitoring security updates for all third-party libraries and applying patches promptly.
 
 ## Secrets Management
 
-Sensitive information such as API keys and environment variables should not be committed directly to the repository. Instead, store secrets securely using GitHub Secrets, and use environment variables in your codebase.
+Sensitive data, such as API keys and environment variables, must not be included in the repository. Instead:
+
+- Use **GitHub Secrets** or equivalent tools for secure storage.  
+- Access secrets through environment variables in your application code.
 
 ## Access Control
 
-- Protect sensitive branches (e.g., `main`, `production`) with **branch protection rules**.
-- Restrict permissions for collaborators and ensure access to sensitive parts of the project is granted based on the principle of least privilege.
+We enforce strict access control policies to safeguard the project:
+
+- **Branch Protection:** Sensitive branches (e.g., `main`, `production`) are protected by rules requiring reviews and status checks before merging.  
+- **Least Privilege Principle:** Collaborator permissions are restricted to minimize access to sensitive components.
 
 ## Secure Deployments
 
-- Use CI/CD tools to ensure all tests pass and security scans are run before deployment.
-- Enable HTTPS for all environments to encrypt data during transmission.
+To ensure secure and reliable deployments:
+
+- Integrate CI/CD pipelines to run tests and security scans before deploying changes.  
+- Enable HTTPS for all environments to secure data during transmission.
 
 ## Licensing
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+This project is licensed under the **MIT License**. For more details, refer to the [LICENSE](LICENSE) file.
 
 ## Acknowledgements
 
-We thank all contributors and the open-source community for helping make this project more secure.
+We extend our gratitude to contributors and the open-source community for their invaluable support in enhancing the security and quality of this project.
