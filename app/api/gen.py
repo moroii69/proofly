@@ -5,28 +5,25 @@ import os
 import io
 import logging
 
-# Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app) 
 
 @app.route('/generate_invoice', methods=['POST'])
 def generate_invoice():
     try:
-        # Get data from the POST request body
         data = request.json
-        logging.debug(f"Received data: {data}")  # Log received data
+        logging.debug(f"Received data: {data}")
         
-        # Hardcoded API key for testing
+        #hardcoded
         api_key = 'kqkqedmreto8ht4na212ubo3dqudag4oat1of085m7r5cmaclbquo'
        
-        # Validate API key (optional but recommended)
+        # validate API key
         if not api_key:
             logging.error("API key is missing")
             return jsonify({"error": "API key is missing"}), 400
         
-        # Prepare parameters
         params = {
             'date': data.get('date', ''),
             'number': data.get('number', ''),
@@ -47,11 +44,9 @@ def generate_invoice():
             'apiKey': api_key
         }
         
-        # Remove empty parameters
         params = {k: v for k, v in params.items() if v}
         logging.debug(f"Prepared parameters: {params}")  # Log prepared parameters
         
-        # Send the GET request to the API
         logging.debug(f"Sending request to API with params: {params}")
         response = requests.get(
             'https://anyapi.io/api/v1/invoice/generate', 
@@ -61,9 +56,7 @@ def generate_invoice():
         logging.debug(f"API Response Status: {response.status_code}")
         logging.debug(f"API Response Content: {response.text}")
         
-        # Check if the request was successful
         if response.status_code == 200:
-            # Create a file-like object from the response content
             return send_file(
                 io.BytesIO(response.content),
                 mimetype='application/pdf',
@@ -71,7 +64,6 @@ def generate_invoice():
                 download_name=f'invoice_{data.get("number", "unknown")}.pdf'
             )
         else:
-            # Handle API error
             logging.error(f"Invoice generation failed: {response.status_code} - {response.text}")
             return jsonify({
                 "error": f"Invoice generation failed: {response.status_code}",
@@ -79,7 +71,7 @@ def generate_invoice():
             }), response.status_code
    
     except Exception as e:
-        # Catch and log any unexpected errors
+        # catch and log any unexpected errors
         logging.error(f"Error occurred: {e}", exc_info=True)
         return jsonify({
             "error": "An unexpected error occurred",

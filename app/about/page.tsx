@@ -73,7 +73,7 @@ export default function AboutPage() {
     { 
         name: "Abdul Raqueeb", 
         role: "Backend Developer & QA Specialist", 
-        img: "https://i.imgur.com/fgEZbMd.jpeg",
+        img: "https://i.imgur.com/pRIsUmC.jpeg",
         // description: "\"Details make perfection, and perfection is not a detail.\""
     }
 ];

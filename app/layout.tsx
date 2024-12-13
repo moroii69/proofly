@@ -48,7 +48,6 @@ export default function RootLayout({
             <div className="min-h-screen bg-background relative">
               {isLoading && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
-                  {/* Ensure l-helix is rendered only on the client side */}
                   {typeof window !== "undefined" && (
                     <l-helix size="45" speed="2.5" color="white"></l-helix>
                   )}
