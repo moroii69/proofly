@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { 
+import {
   createUserWithEmailAndPassword, 
   GoogleAuthProvider, 
   GithubAuthProvider, 
@@ -235,7 +235,7 @@ export default function SignUpPage() {
 
         <div className="text-center text-sm text-muted-foreground mt-4">
           Already have an account?{" "}
-          <Link href="/login" className="text-primary hover:underline">
+          <Link href="/login" className="text-primary underline hover:no-underline">
             Log in
           </Link>
         </div>

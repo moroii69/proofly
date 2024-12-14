@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { FileText, Lock, Globe, Check, Share, Clock, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function HowItWorksPage() {
   const steps = [
@@ -124,7 +125,9 @@ export default function HowItWorksPage() {
 
       {/* Call to Action */}
       <div className="text-center mt-12">
-        <Button className="px-6 py-3 text-base">Get Started</Button>
+        <Link href="/dashboard">
+          <Button className="px-6 py-3 text-base">Get Started</Button>
+        </Link>
       </div>
     </div>
   );

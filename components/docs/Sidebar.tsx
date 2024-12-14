@@ -10,7 +10,7 @@ interface NavItemProps {
   item: {
     title: string;
     href: string;
-    icon?: JSX.Element;
+    icon?: React.ReactNode;
     children?: { title: string; href: string }[];
   };
   isChild?: boolean;
