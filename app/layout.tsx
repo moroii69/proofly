@@ -54,7 +54,7 @@ export default function RootLayout({
                 </div>
               )}
               <Navbar />
-              <main>{children}</main>
+              <main className="pt-16 relative z-0">{children}</main>
               <Footer />
             </div>
             <Toaster />

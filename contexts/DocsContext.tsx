@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { Book, FileText, Clipboard, DollarSign, Cloud } from "lucide-react";
+import { motion } from "framer-motion";
 
 export type DocSection = {
   title: string;
@@ -175,17 +176,88 @@ const docsContent: DocSection[] = [
       }
     ]
   },
-  {
-    title: "pricing",
-    href: "#pricing",
-    icon: <DollarSign className="h-4 w-4" />,
-    content: (
-      <section id="pricing">
-        <h2 className="text-3xl font-semibold mb-4">Pricing</h2>
-        <p>Detailed pricing information for Proofly, including subscription plans and discounts.</p>
-      </section>
-    )
-  },
+{
+  title: "pricing",
+  href: "#pricing",
+  icon: <DollarSign className="h-4 w-4" />,
+  content: (
+    <section id="pricing" className="min-h-screen py-24 px-4 sm:px-6 lg:px-8 bg-gray-900">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
+          Simple, transparent pricing
+        </h2>
+        <p className="mt-4 text-lg text-gray-300">
+          Choose the plan that fits your needs, from essential tools to advanced enterprise features.
+        </p>
+      </div>
+      <div className="mt-8 flex flex-wrap justify-center gap-6">
+        {/* Starter Plan */}
+        <motion.div
+          className="w-full max-w-[400px] border rounded-lg p-6 shadow-sm bg-gray-800"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          whileHover={{ y: -5 }}
+        >
+          <h3 className="text-xl font-bold mb-2 text-green-400">Starter</h3>
+          <p className="text-gray-400 mb-4">
+            Ideal for individuals or light use. Get started with essential tools to generate professional documents.
+          </p>
+          <ul className="text-gray-400 mb-4 space-y-2">
+            <li>✔ 10 receipts/month</li>
+            <li>✔ Basic templates</li>
+            <li>✔ Email support</li>
+          </ul>
+          <div className="text-white font-semibold text-lg">₹0/month</div>
+        </motion.div>
+
+        {/* Plus Plan */}
+        <motion.div
+          className="w-full max-w-[400px] border rounded-lg p-6 shadow-sm bg-gray-800"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          whileHover={{ y: -5 }}
+        >
+          <h3 className="text-xl font-bold mb-2 text-blue-400">Plus</h3>
+          <p className="text-gray-400 mb-4">
+            Great for professionals and small businesses. Unlock customization and analytics for better insights.
+          </p>
+          <ul className="text-gray-400 mb-4 space-y-2">
+            <li>✔ 100 receipts/month</li>
+            <li>✔ Custom templates</li>
+            <li>✔ Analytics dashboard</li>
+            <li>✔ Priority support</li>
+          </ul>
+          <div className="text-white font-semibold text-lg">₹499/month</div>
+        </motion.div>
+
+        {/* Max Plan */}
+        <motion.div
+          className="w-full max-w-[400px] border rounded-lg p-6 shadow-sm bg-gray-800"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          whileHover={{ y: -5 }}
+        >
+          <h3 className="text-xl font-bold mb-2 text-yellow-400">Max</h3>
+          <p className="text-gray-400 mb-4">
+            Designed for enterprises needing tailored solutions, advanced tools, and collaborative features.
+          </p>
+          <ul className="text-gray-400 mb-4 space-y-2">
+            <li>✔ Unlimited receipts</li>
+            <li>✔ Custom templates</li>
+            <li>✔ Analytics dashboard</li>
+            <li>✔ Priority support</li>
+            <li>✔ API access</li>
+            <li>✔ Team collaboration</li>
+          </ul>
+          <div className="text-white font-semibold text-lg">Custom Pricing</div>
+        </motion.div>
+      </div>
+    </section>
+  )
+},
   {
     title: "deployment",
     href: "#deployment",
