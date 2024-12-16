@@ -66,13 +66,13 @@ export default function AboutPage() {
     },
     { 
         name: "Mohd Abrar", 
-        role: "Gay", 
+        role: "QA Engineer", 
         img: "https://i.imgur.com/xRYoAda.jpeg",
         // description: "\"Excellence is not an act, but a habit.\" "
     },
     { 
         name: "Abdul Raqueeb", 
-        role: "All rounder", 
+        role: "QA Engineer", 
         img: "https://i.imgur.com/pRIsUmC.jpeg",
         // description: "\"Details make perfection, and perfection is not a detail.\""
     }

@@ -22,6 +22,7 @@ export default function InvoiceGeneratorPage() {
     locale: 'en-US',
     notes: '',
     apiKey: 'kqkqedmreto8ht4na212ubo3dqudag4oat1of085m7r5cmaclbquo'
+    // to be replaced with your own API key (leave it as is for testing)
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -41,7 +42,7 @@ export default function InvoiceGeneratorPage() {
     setError(null);
   
     try {
-      const response = await axios.post('http://127.0.0.1:5000/generate_invoice', formData, {
+      const response = await axios.post('http://127.0.0.1:5000/generate_invoice', formData, { //this is the local server address where the flask server is running
         headers: {
           'Content-Type': 'application/json'
         },
@@ -64,6 +65,7 @@ export default function InvoiceGeneratorPage() {
     }
   };
 
+  // Function to download the generated invoice
   const downloadInvoice = () => {
     if (invoiceUrl) {
       const link = document.createElement('a');

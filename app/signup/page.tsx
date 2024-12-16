@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 
+// Form schema for validation using Zod
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
@@ -29,6 +30,7 @@ const formSchema = z.object({
   path: ["confirmPassword"],
 });
 
+// Sign up page component definition
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -70,7 +72,7 @@ export default function SignUpPage() {
 
     } catch (error) {
       const firebaseError = error as { code?: string, message?: string };
-      
+      // More specific error handling
       let errorMessage = `Could not sign up with ${provider}`;
       switch (firebaseError.code) {
         case 'auth/account-exists-with-different-credential':
@@ -84,12 +86,14 @@ export default function SignUpPage() {
           return; // Don't show toast if user deliberately closed popup
       }
 
+      // Show error toast
       toast({
         title: "Error",
         description: errorMessage,
         variant: "destructive",
       });
 
+      // Log error to console
       console.error(`${provider.toUpperCase()} Signup error:`, {
         code: firebaseError.code,
         message: firebaseError.message
