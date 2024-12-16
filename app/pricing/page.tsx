@@ -7,13 +7,13 @@ import { motion } from "framer-motion";
 const plans = [
   {
     name: "Free",
-    price: "₹499",
-    description: "Perfect for getting started",
+    price: "$0",
+    description: "Great for individuals just starting out.",
     features: [
       { name: "30 receipts per month", included: true },
       { name: "Basic templates", included: true },
       { name: "Email support", included: true },
-      { name: "Custom templates", included: true },
+      { name: "Custom templates", included: false },
       { name: "Analytics dashboard", included: false },
       { name: "Priority support", included: false },
       { name: "API access", included: false },
@@ -22,8 +22,8 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "₹1499",
-    description: "Best for growing businesses",
+    price: "$19.99",
+    description: "Ideal for small businesses looking to scale.",
     features: [
       { name: "Unlimited receipts", included: true },
       { name: "All basic templates", included: true },
@@ -37,20 +37,20 @@ const plans = [
   },
   {
     name: "Enterprise",
-    price: "₹4999",
-    description: "For large organizations",
+    price: "$49.99",
+    description: "Comprehensive features for large organizations.",
     features: [
       { name: "Unlimited receipts", included: true },
       { name: "All templates", included: true },
-      { name: "24/7 support", included: true },
+      { name: "24/7 priority support", included: true },
       { name: "Custom templates", included: true },
       { name: "Advanced analytics", included: true },
-      { name: "Priority support", included: true },
       { name: "API access", included: true },
       { name: "Team collaboration", included: true },
     ],
   },
 ];
+
 
 export default function PricingPage() {
   return (

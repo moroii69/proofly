@@ -104,7 +104,7 @@ export default function Home() {
         {showScrollHint && (
           <button 
             onClick={scrollToFeatures}
-            className="hidden sm:block absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center cursor-pointer group"
+            className="hidden sm:block absolute bottom-16 left-1/2 transform -translate-x-1/2 text-center cursor-pointer group"
           >
             <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors animate-bounce">
               Discover Features

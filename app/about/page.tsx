@@ -60,19 +60,19 @@ export default function AboutPage() {
     },
     { 
         name: "Faheem Ahmed", 
-        role: "Frontend Developer & Backend Engineer", 
+        role: "Frontend Developer", 
         img: "https://i.imgur.com/TcoZO6R.jpeg",
         // description: "\"The world is a bug that needs fixing.\""
     },
     { 
         name: "Mohd Abrar", 
-        role: "QA Specialist", 
-        img: "https://i.imgur.com/Nm7NbDF.jpeg",
+        role: "Gay", 
+        img: "https://i.imgur.com/xRYoAda.jpeg",
         // description: "\"Excellence is not an act, but a habit.\" "
     },
     { 
         name: "Abdul Raqueeb", 
-        role: "Backend Developer & QA Specialist", 
+        role: "All rounder", 
         img: "https://i.imgur.com/pRIsUmC.jpeg",
         // description: "\"Details make perfection, and perfection is not a detail.\""
     }
@@ -104,7 +104,7 @@ export default function AboutPage() {
             transition={{ delay: 0.4 }}
             className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            We are a passionate team of innovators dedicated to transforming business operations through cutting-edge technology. Our mission is to provide intuitive, powerful solutions that empower businesses to thrive in a digital world.
+            We are a passionate team creating intuitive, powerful tools to help businesses thrive in the digital age.
           </motion.p>
           
           <motion.div

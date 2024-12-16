@@ -54,7 +54,7 @@ function DashboardPage() {
   return (
     <div className="bg-black text-white min-h-screen flex flex-col justify-center items-center p-4 relative">
       <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-        DASHBOARD
+        Dashboard
       </h1>
       <p className="text-lg mb-6 text-gray-300">Manage and track your invoices, bills, and receipts</p>
 
@@ -64,13 +64,13 @@ function DashboardPage() {
           onValueChange={setActiveTab}
           className="w-full max-w-md mb-8"
         >
-          <TabsList className="grid w-full grid-cols-3 bg-gray-800 shadow-lg rounded-lg">
+          <TabsList className="grid w-full grid-cols-3 bg-gray-950 shadow-lg rounded-lg">
             <Tooltip>
               <TooltipTrigger asChild>
                 <TabsTrigger 
                   id="generate-tab" 
                   value="generate" 
-                  className="text-white hover:bg-gray-700 transition-all duration-300 group"
+                  className="text-white hover:bg-gray-900 transition-all duration-300 group"
                 >
                   <FileText className="mr-2 w-5 h-5 text-blue-400 group-hover:text-blue-300" />
                   Generate
@@ -86,7 +86,7 @@ function DashboardPage() {
                 <TabsTrigger 
                   id="analytics-tab" 
                   value="analytics" 
-                  className="text-white hover:bg-gray-700 transition-all duration-300 group"
+                  className="text-white hover:bg-gray-900 transition-all duration-300 group"
                 >
                   <BarChart2 className="mr-2 w-5 h-5 text-green-400 group-hover:text-green-300" />
                   Analytics
@@ -102,7 +102,7 @@ function DashboardPage() {
                 <TabsTrigger 
                   id="settings-tab" 
                   value="settings" 
-                  className="text-white hover:bg-gray-700 transition-all duration-300 group"
+                  className="text-white hover:bg-gray-900 transition-all duration-300 group"
                 >
                   <SettingsIcon className="mr-2 w-5 h-5 text-purple-400 group-hover:text-purple-300" />
                   Settings
@@ -123,7 +123,7 @@ function DashboardPage() {
               transition={{ duration: 0.3 }}
             >
               <TabsContent value="generate" className="mt-4">
-                <Card className="bg-gray-800 shadow-2xl">
+                <Card className="bg-gray-950 shadow-2xl">
                   <CardHeader>
                     <CardTitle className="text-white">Generate Documents</CardTitle>
                   </CardHeader>
