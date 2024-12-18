@@ -31,26 +31,67 @@ const features = [
 
 export default function Home() {
   const [showScrollHint, setShowScrollHint] = useState(true);
-  const { user, loading } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+  const { user, loading: authLoading } = useAuth();
 
   useEffect(() => {
+    // Check if all critical dependencies are loaded
+    const checkDependencies = async () => {
+      try {
+        // Add any additional checks for critical resources
+        await Promise.all([
+          // Example: Fetch initial data or check critical resources
+          // new Promise(resolve => setTimeout(resolve, 1000)), // Simulated delay for demonstration
+          // Ensure auth is not in a loading state
+          new Promise<void>((resolve) => {
+            if (!authLoading) resolve();
+          })
+        ]);
+
+        // Check if motion and other libraries are available
+        if (typeof motion === 'undefined') {
+          throw new Error('Motion library not loaded');
+        }
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Loading failed:', error);
+        // Optionally, you could set a more specific error state
+        setIsLoading(true);
+      }
+    };
+
     const handleScroll = () => {
       setShowScrollHint(window.scrollY < 50);
     };
 
+    // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
+
+    // Run dependency check
+    checkDependencies();
+
+    // Cleanup
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [authLoading]);
 
   const scrollToFeatures = () => {
     const featuresSection = document.getElementById('features');
     featuresSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
+  // Loading state with a more comprehensive loader
+  if (isLoading || authLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <p className="text-muted-foreground">Loading resources...</p>
+        </div>
+      </div>
+    );
   }
 
   const redirectPath = user ? "/dashboard" : "/signup";
