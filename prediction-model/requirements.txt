@@ -1,0 +1,8 @@
+pandas
+tqdm
+colorama
+tensorflow
+numpy
+scikit-learn
+matplotlib
+seaborn
