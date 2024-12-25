@@ -28,7 +28,6 @@ const registerSchema = z.object({
     required_error: "Please select a condition",
   }),
 });
-
 export default function RegisterPage() {
   const router = useRouter();
   const { toast } = useToast();
@@ -40,7 +39,7 @@ export default function RegisterPage() {
       name: "",
       email: "",
       password: "",
-      condition: undefined,
+      condition: "diabetes" // Set a default value from the enum
     },
   });
 
@@ -207,7 +206,7 @@ export default function RegisterPage() {
                     <FormItem>
                       <FormLabel htmlFor="condition">Health Condition</FormLabel>
                       <FormControl>
-                        <Select {...field} defaultValue="">
+                      <Select onValueChange={field.onChange} value={field.value}>
                           <SelectTrigger>
                             <SelectValue placeholder="Select a condition" />
                           </SelectTrigger>
