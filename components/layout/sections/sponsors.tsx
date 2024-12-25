@@ -6,8 +6,10 @@ import { SiTensorflow } from "react-icons/si";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import { IoLogoFirebase, IoLogoVercel } from "react-icons/io5";
-import { SiExpress } from "react-icons/si";
 import { LiaDocker } from "react-icons/lia";
+import { TbBrandNextjs } from "react-icons/tb";
+import { RiTailwindCssFill } from "react-icons/ri";
+import { SiTypescript } from "react-icons/si";
 
 interface TechStackProps {
   icon: JSX.Element;
@@ -16,12 +18,20 @@ interface TechStackProps {
 
 const techStack: TechStackProps[] = [
   {
+    icon: <TbBrandNextjs />,
+    name: "Next.js",
+  },
+  {
+    icon: <RiTailwindCssFill />,
+    name: "Tailwind CSS",
+  },
+  {
     icon: <FaNodeJs />,
     name: "Node.js",
   },
   {
-    icon: <SiExpress />,
-    name: "Express.js",
+    icon: <SiTypescript />,
+    name: "TypeScript",
   },
   {
     icon: <FaPython />,
