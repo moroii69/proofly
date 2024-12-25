@@ -1,13 +1,8 @@
+import React from 'react';
 import GithubIcon from "@/components/icons/github-icon";
 import LinkedInIcon from "@/components/icons/linkedin-icon";
 import XIcon from "@/components/icons/x-icon";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -119,78 +114,79 @@ export const TeamSection = () => {
   };
 
   return (
-    <section id="team" className="container lg:w-[75%] py-24 sm:py-32">
-      <div className="text-center mb-8">
-        <h2 className="text-lg text-primary text-center mb-2 tracking-wider">
-          Our Team
-        </h2>
-
-        <h2 className="text-3xl md:text-4xl text-center font-bold">
-          Meet the Team Behind the Project
-        </h2>
-      </div>
-
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {teamList.map(
-          (
-            { imageUrl, firstName, lastName, positions, socialNetworks },
-            index
-          ) => (
-            <Card
-              key={index}
-              className="bg-muted/60 dark:bg-card flex flex-col h-full overflow-hidden group/hoverimg"
-            >
-              <CardHeader className="p-0 gap-0">
-                <div className="h-full overflow-hidden">
-                  <Image
-                    src={imageUrl}
-                    alt=""
-                    width={300}
-                    height={300}
-                    className="w-full aspect-square object-cover saturate-0 transition-all duration-200 ease-linear size-full group-hover/hoverimg:saturate-100 group-hover/hoverimg:scale-[1.01]"
-                  />
-                </div>
-                <CardTitle className="py-6 pb-4 px-6">
-                  {firstName}
-                  <span className="text-primary ml-2">{lastName}</span>
-                </CardTitle>
-              </CardHeader>
-              {positions.map((position, index) => (
-                <CardContent
-                  key={index}
-                  className={`pb-0 text-muted-foreground ${
-                    index === positions.length - 1 && "pb-6"
-                  }`}
-                >
-                  {position}
-                  {index < positions.length - 1 && <span>,</span>}
-                </CardContent>
-              ))}
-
-              <CardFooter className="space-x-4 mt-auto">
-                {socialNetworks.map(({ name, url }, index) => (
-                  <Link
-                    key={index}
-                    href={url}
-                    target="_blank"
-                    className="hover:opacity-80 transition-all"
-                  >
-                    {socialIcon(name)}
-                  </Link>
-                ))}
-              </CardFooter>
-            </Card>
-          )
-        )}
-      </div>
-
-      <div className="text-center mt-12">
-        <p className="text-lg text-muted-foreground">
-          If you have any questions or need assistance, feel free to contact us at <a href="mailto:support@proofly.xyz" className="text-primary">support@proofly.xyz</a>.
+    <section id="team" className="container px-4 py-16 sm:py-24">
+      <div className="text-center mb-12">
+        <h2 className="text-lg text-primary tracking-wider mb-2">Our Team</h2>
+        <h3 className="text-3xl md:text-4xl font-bold mb-4">Meet the Team Behind the Project</h3>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          We&apos;re a dedicated group of professionals working together to bring innovative solutions to document verification.
         </p>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
+        {teamList.map(({ imageUrl, firstName, lastName, positions, socialNetworks }, index) => (
+          <Card key={index} className="bg-muted/60 dark:bg-card overflow-hidden group/card hover:shadow-lg transition-all duration-300">
+            <CardHeader className="p-0 gap-0">
+              <div className="relative overflow-hidden">
+                <Image
+                  src={imageUrl}
+                  alt={`${firstName} ${lastName}`}
+                  width={200}
+                  height={200}
+                  className="w-full aspect-square object-cover saturate-0 group-hover/card:saturate-100 transition-all duration-300 scale-100 group-hover/card:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
+              </div>
+              <CardTitle className="p-3 text-sm sm:text-base">
+                {firstName}
+                <span className="text-primary ml-1">{lastName}</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-3 pt-0">
+              <div className="text-xs sm:text-sm text-muted-foreground">
+                {positions.join(", ")}
+              </div>
+            </CardContent>
+            <CardFooter className="p-3 pt-0 flex gap-2">
+              {socialNetworks.map(({ name, url }, index) => (
+                <Link
+                  key={index}
+                  href={url}
+                  target="_blank"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {socialIcon(name)}
+                </Link>
+              ))}
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="bg-muted/60 p-6 rounded-lg">
+          <h4 className="text-xl font-semibold mb-4">Join Our Team</h4>
+          <p className="text-muted-foreground mb-4">
+            We&apos;re always looking for talented individuals to join our team. Check out our open positions or send us your resume.
+          </p>
+          <Link href="https://forms.gle/V5QSr548j3Q6eyPu5" target="_blank" className="text-primary hover:underline">
+            Join Us →
+          </Link>
+        </div>
+        
+        <div className="bg-muted/60 p-6 rounded-lg">
+          <h4 className="text-xl font-semibold mb-4">Contact Us</h4>
+          <p className="text-muted-foreground mb-4">
+            Have questions or want to learn more about our team? We&apos;d love to hear from you.
+          </p>
+          <a href="mailto:support@proofly.xyz" className="text-primary hover:underline">
+            support@proofly.xyz
+          </a>
+        </div>
       </div>
 
     </section>
   );
 };
+
+export default TeamSection;
