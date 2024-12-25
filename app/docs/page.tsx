@@ -1,11 +1,10 @@
-import { FooterSection } from "@/components/layout/sections/footer";
-
-
-export default function Home() {
-  return (
-    <div className="flex flex-col items-center">
-      <FooterSection />
-    </div>
-  );
-}
-
+// app/docs/page.tsx
+export default function DocsHomePage() {
+    return (
+      <div>
+        <h1>Welcome to the Documentation</h1>
+        <p>This is the main documentation page.</p>
+      </div>
+    );
+  }
+  
