@@ -7,6 +7,8 @@ import { AuthProvider } from "@/components/auth-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -42,6 +44,8 @@ export default function RootLayout({
             <Toaster />
           </AuthProvider>
         </ThemeProvider>
+        <SpeedInsights/>
+        <Analytics/>
       </body>
     </html>
   );
