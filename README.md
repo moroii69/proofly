@@ -42,6 +42,8 @@ Empowering individuals to manage chronic conditions with personalized health ins
 | **Build Tools**       | Webpack, Vercel (deployment platform)                   |
 | **Data Handling**     | WebSockets (for real-time updates), GraphQL (data querying) |
 | **Performance**       | Priority Hints (performance optimization)               |
+| **Machine Learning**  | Tensorflow, Firebase ML, Scikit-learn                   |
+
 
 ---
 
@@ -67,7 +69,7 @@ Empowering individuals to manage chronic conditions with personalized health ins
 ## live demo
 
 Explore the live version of the app here:  
-[proofly](https://predict-ai-production.vercel.app/)
+[proofly](https://proofly.xyz/)
 
 ---
 

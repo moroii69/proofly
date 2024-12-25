@@ -7,10 +7,8 @@ from tqdm import tqdm
 from colorama import init, Fore, Style
 import itertools
 
-# Colorama setup, this is for colored output in the terminal
 init(autoreset=True)
 
-# Health condition metrics and their units – defining these for each condition
 metric_options = {
     'diabetes': [
         {'value': 'bloodGlucose', 'label': 'blood glucose', 'unit': 'mg/dL'},
@@ -39,7 +37,6 @@ metric_options = {
     ]
 }
 
-# Value ranges for each metric – defining limits, you know
 value_range = {
     'diabetes': {
         'bloodGlucose': {'min': 50, 'max': 400},
@@ -68,12 +65,10 @@ value_range = {
     }
 }
 
-# Helper function to generate random values for the metrics – let's keep it dynamic
 def generate_random_value(metric, condition):
     value = random.uniform(value_range[condition][metric]['min'], value_range[condition][metric]['max'])
     return round(value, 2)
 
-# Helper function to determine the health risk based on blood pressure
 def generate_health_risk(blood_pressure):
     if blood_pressure < 120:
         return 'LOW'
@@ -82,11 +77,9 @@ def generate_health_risk(blood_pressure):
     else:
         return 'HIGH'
 
-# Generate confidence levels, because why not keep it realistic?
 def generate_confidence():
     return random.randint(80, 100)
 
-# Simulate a loading spinner, you know, just to show something's happening
 def loading_spinner():
     spinner = itertools.cycle(['|', '/', '-', '\\'])
     for _ in range(30):
@@ -94,12 +87,10 @@ def loading_spinner():
         sys.stdout.flush()
         time.sleep(0.1)
 
-# Animated progress bar for tasks – looks cool, right?
 def animated_progress_bar(task_name, total_steps):
     for i in tqdm(range(total_steps), desc=task_name, ncols=100, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt}"):
         time.sleep(0.1)
 
-# Function to generate the dataset with progress – gathering data, one row at a time
 def generate_dataset(num_rows):
     data = []
     for _ in tqdm(range(num_rows), desc="Generating Rows", ncols=100, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt}"):
@@ -109,7 +100,6 @@ def generate_dataset(num_rows):
                 value = generate_random_value(metric['value'], condition)
                 row[f"{condition}_{metric['value']}"] = value
         
-        # Add health risk and confidence, gotta keep it accurate
         blood_pressure = row.get('diabetes_bloodPressure') or row.get('hypertension_systolic')
         health_risk = generate_health_risk(blood_pressure)
         confidence = generate_confidence()
@@ -117,7 +107,6 @@ def generate_dataset(num_rows):
         row['health_risk'] = health_risk
         row['confidence'] = confidence
         
-        # Generate timestamp – adding that extra touch
         timestamp = (datetime.now() - timedelta(minutes=random.randint(0, 1440))).strftime('%Y-%m-%d %H:%M:%S')
         row['timestamp'] = timestamp
         
@@ -125,14 +114,12 @@ def generate_dataset(num_rows):
         
     return pd.DataFrame(data)
 
-# Save data to CSV with visual progress – saving that data in style
 def save_to_csv(df, filename):
     print(f"{Fore.YELLOW}Saving the data to CSV...")
     animated_progress_bar("Saving Data", 100)
     df.to_csv(filename, index=False)
     print(f"{Fore.CYAN}Dataset has been saved to {filename}.")
 
-# Main function to kick off the data generation – start the show
 def main():
     num_rows = 424657534  # Adjust based on desired dataset size, it's gonna be big big big.
     print(f"{Style.BRIGHT}{Fore.MAGENTA}Starting dataset generation...")
