@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+#mail templates
+/email-templates
+
 # testing
 /coverage
 

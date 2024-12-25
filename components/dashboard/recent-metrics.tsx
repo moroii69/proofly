@@ -24,17 +24,28 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Toast } from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast"
 
 export function RecentMetrics() {
   const { user } = useAuth();
   const router = useRouter();
+  const { toast } = useToast()
   const [metrics, setMetrics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [metricToDelete, setMetricToDelete] = useState<string | null>(null);
-  const [isToastVisible, setIsToastVisible] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check for mobile viewport on mount and window resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!user) return;
@@ -61,22 +72,31 @@ export function RecentMetrics() {
 
   const handleDelete = async () => {
     if (!metricToDelete) return;
-
+  
     try {
       const metricRef = doc(db, "users", user?.uid!, "metrics", metricToDelete);
       await deleteDoc(metricRef);
-      setToastMessage("Metric deleted successfully!");
-      setIsToastVisible(true);
+  
+      toast({
+        title: "✅ Success",
+        description: "Metric deleted successfully!",
+        variant: "default",
+      });
+  
       setIsDeleteModalOpen(false);
-    } catch (error) {
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: "Failed to delete metric. Please try again.",
+        variant: "destructive",
+      });
+  
       console.error("Error deleting metric:", error);
-      setToastMessage("Failed to delete metric. Please try again.");
-      setIsToastVisible(true);
     }
   };
 
   if (loading) {
-    return <div>Loading recent metrics...</div>;
+    return <div className="text-center py-4">Loading recent metrics...</div>;
   }
 
   if (metrics.length === 0) {
@@ -92,8 +112,75 @@ export function RecentMetrics() {
     );
   }
 
+  // Mobile card view
+  if (isMobile) {
+    return (
+      <div className="space-y-4">
+        {metrics.map((metric) => (
+          <div
+            key={metric.id}
+            className="bg-card rounded-lg shadow p-4 space-y-2 border"
+          >
+            <div className="flex justify-between items-start">
+              <div className="space-y-1">
+                <div className="font-medium">{metric.metricType}</div>
+                <div className="text-sm text-muted-foreground">{metric.date}</div>
+              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    onClick={() => {
+                      setMetricToDelete(metric.id);
+                      setIsDeleteModalOpen(true);
+                    }}
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                  >
+                    <Trash size={16} />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Are you sure you want to delete this metric?</DialogTitle>
+                    <DialogDescription>
+                      This action cannot be undone. It will permanently delete the selected metric.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex justify-end mt-4">
+                    <Button
+                      onClick={() => setIsDeleteModalOpen(false)}
+                      variant="secondary"
+                      className="mr-2"
+                    >
+                      Cancel
+                    </Button>
+                    <Button onClick={handleDelete} variant="destructive">
+                      Delete
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <div className="text-sm">
+              <span className="font-medium">Value: </span>
+              {metric.value} {metric.unit}
+            </div>
+            {metric.notes && (
+              <div className="text-sm">
+                <span className="font-medium">Notes: </span>
+                {metric.notes}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Desktop table view
   return (
-    <>
+    <div className="overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow>
@@ -107,12 +194,11 @@ export function RecentMetrics() {
         <TableBody>
           {metrics.map((metric) => (
             <TableRow key={metric.id}>
-              <TableCell>{metric.date}</TableCell>
+              <TableCell className="whitespace-nowrap">{metric.date}</TableCell>
               <TableCell>{metric.metricType}</TableCell>
               <TableCell>{metric.value} {metric.unit}</TableCell>
               <TableCell>{metric.notes || "-"}</TableCell>
               <TableCell>
-                {/* Delete Button (Dialog) */}
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
@@ -120,7 +206,7 @@ export function RecentMetrics() {
                         setMetricToDelete(metric.id);
                         setIsDeleteModalOpen(true);
                       }}
-                      color="destructive"
+                      variant="ghost"
                       size="icon"
                     >
                       <Trash size={16} />
@@ -141,7 +227,7 @@ export function RecentMetrics() {
                       >
                         Cancel
                       </Button>
-                      <Button onClick={handleDelete} color="destructive">
+                      <Button onClick={handleDelete} variant="destructive">
                         Delete
                       </Button>
                     </div>
@@ -152,14 +238,6 @@ export function RecentMetrics() {
           ))}
         </TableBody>
       </Table>
-
-      {/* Toast Notification */}
-      {isToastVisible && (
-        <div className="toast">
-          <div className="toast-message">{toastMessage}</div>
-          <button onClick={() => setIsToastVisible(false)}>Close</button>
-        </div>
-      )}
-    </>
+    </div>
   );
 }

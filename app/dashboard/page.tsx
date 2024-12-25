@@ -61,63 +61,81 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="flex-1 space-y-4">
-      <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+    <div className="flex-1 p-4 space-y-4 max-w-7xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Dashboard</h2>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
+
+      {/* Metric Cards */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <Card className="w-full">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Health Score</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-xl sm:text-2xl font-bold">
               {healthScore ? `${healthScore}/100` : "No Data"}
             </div>
-            <p className="text-xs text-muted-foreground">based on recent metrics</p>
+            <p className="text-xs text-muted-foreground">Based on recent metrics</p>
           </CardContent>
         </Card>
-        <Card>
+
+        <Card className="w-full">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Risk Level</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className={`text-2xl font-bold ${getRiskLevelColor(riskLevel)}`}>
+            <div className={`text-xl sm:text-2xl font-bold ${getRiskLevelColor(riskLevel)}`}>
               {riskLevel}
             </div>
-            <p className="text-xs text-muted-foreground">based on recent metrics</p>
+    
+        <p className="text-xs text-muted-foreground">
+          {riskLevel === "Low"
+            ? "You're in great shape!"
+            : riskLevel === "Medium"
+            ? "Keep an eye on your health."
+            : "Consult a healthcare provider immediately."}
+        </p>
+
+
           </CardContent>
         </Card>
-        <Card>
+
+        <Card className="w-full">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Next Check-up</CardTitle>
           </CardHeader>
           <NextCheckupCard />
         </Card>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
+
+      {/* Charts Section */}
+      <div className="grid gap-4 grid-cols-1 lg:grid-cols-7">
+        <Card className="w-full lg:col-span-4">
           <CardHeader>
-            <CardTitle>Overview</CardTitle>
+            <CardTitle className="text-lg sm:text-xl">Overview</CardTitle>
           </CardHeader>
-          <CardContent className="pl-2">
+          <CardContent className="pl-2 overflow-x-auto">
             <Overview />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+
+        <Card className="w-full lg:col-span-3">
           <CardHeader>
-            <CardTitle>Health Predictions</CardTitle>
+            <CardTitle className="text-lg sm:text-xl">Health Predictions</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="overflow-x-auto">
             <HealthPrediction />
           </CardContent>
         </Card>
       </div>
-      <Card>
+
+      {/* Recent Metrics Section */}
+      <Card className="w-full">
         <CardHeader>
-          <CardTitle>Recent Metrics</CardTitle>
+          <CardTitle className="text-lg sm:text-xl">Recent Metrics</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="overflow-x-auto">
           <RecentMetrics />
         </CardContent>
       </Card>
