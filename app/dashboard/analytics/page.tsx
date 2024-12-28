@@ -59,7 +59,7 @@ const MetricChart = ({ data, title, description }: MetricChartProps) => {
   }, []);
 
   const calculateStats = () => {
-    if (data.length < 2) return { trend: 0, min: 0, max: 0, avg: 0 };
+    if (data.length < 2) return { trend: 0, min: 0, max: 0, avg: 0, lastValue: 0 };
     const values = data.map(d => d.value);
     const lastValue = values[values.length - 1];
     const previousValue = values[values.length - 2];
@@ -67,10 +67,14 @@ const MetricChart = ({ data, title, description }: MetricChartProps) => {
     const min = Math.min(...values);
     const max = Math.max(...values);
     const avg = parseFloat((values.reduce((a, b) => a + b, 0) / values.length).toFixed(1));
-    return { trend, min, max, avg };
+    const lastRecordedValue = data.length > 0 ? data[data.length].value : 0;
+    return { trend, min, max, avg, lastValue, lastRecordedValue };
   };
 
   const stats = calculateStats();
+  //get the last recorded value (previous method not working)
+  // moved up 👇
+  // const lastRecordedValue = data.length > 0 ? data[data.length - 1].value : 0;
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -108,7 +112,7 @@ const MetricChart = ({ data, title, description }: MetricChartProps) => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
   <div className="bg-muted/50 p-3 rounded-lg">
     <p className="text-sm text-muted-foreground">Last Recorded Value</p>
-    <p className="text-lg font-medium">{stats.max}</p> {/* Last Recorded Value */}
+    <p className="text-lg font-medium">{stats.lastRecordedValue}</p> {/* Last Recorded Value */}
   </div>
   <div className="bg-muted/50 p-3 rounded-lg">
     <p className="text-sm text-muted-foreground">Minimum</p>

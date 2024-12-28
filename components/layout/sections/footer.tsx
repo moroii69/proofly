@@ -18,19 +18,19 @@ export const FooterSection = () => {
           <div className="flex flex-col gap-2">
             <h3 className="font-bold text-lg">Contact</h3>
             <div>
-              <Link href="github.com/morii69" target="_blank" className="opacity-60 hover:opacity-100">
+              <Link href="https://www.github.com/morii69/proofly" target="_blank" className="opacity-60 hover:opacity-100">
                 Github
               </Link>
             </div>
 
             <div>
-              <Link href="x.com/Ufraan1" className="opacity-60 hover:opacity-100">
+              <Link href="https://www.x.com/Ufraan1" target="_blank" className="opacity-60 hover:opacity-100">
                 Twitter
               </Link>
             </div>
 
             <div>
-              <Link href="instagram.com/ufraaan" className="opacity-60 hover:opacity-100">
+              <Link href="https://www.instagram.com/ufraaan" target="_blank" className="opacity-60 hover:opacity-100">
                 Instagram
               </Link>
             </div>

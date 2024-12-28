@@ -77,6 +77,28 @@ const valueRange = {
     heartRate: { min: 40, max: 200 }, // bpm
   },
 };
+const getDiseasesForMetric = (metricValue: string) => {
+  return Object.entries(metricOptions)
+    .filter(([_, metrics]) => metrics.some(m => m.value === metricValue))
+    .map(([disease]) => disease)
+    .join(', ');
+};
+
+const getDisplayLabel = (value: string) => {
+  console.log('getDisplayLabel called with:', value);
+  const metric = Object.values(metricOptions)
+    .flat()
+    .find((m) => m.value === value);
+  console.log('Found metric for display:', metric);
+  if (metric) {
+    const diseases = getDiseasesForMetric(value);
+    console.log('Diseases for display:', diseases);
+    return `${metric.label} (${diseases})`;
+  }
+  return value;
+};
+
+
 
 export default function NewMetricPage() {
   const { user } = useAuth();
@@ -95,16 +117,22 @@ export default function NewMetricPage() {
     },
   });
 
+
+
   const handleMetricTypeChange = (value: string) => {
+    console.log('Selected value:', value);
+    console.log('Current form values:', form.getValues());
     setSelectedMetric(value);
     const metric = Object.values(metricOptions)
       .flat()
       .find((m) => m.value === value);
+    console.log('Found metric:', metric);
     if (metric) {
-      form.setValue("unit", metric.unit);
+      const diseases = getDiseasesForMetric(value);
+      console.log('Associated diseases:', diseases);
+      form.setValue("unit", `${metric.unit} (${diseases})`);
     }
   };
-
   async function onSubmit(values: z.infer<typeof metricsSchema>) {
     if (!user) return;
 
@@ -174,7 +202,7 @@ export default function NewMetricPage() {
       <div className="w-full max-w-lg">
         <Card>
           <CardHeader>
-            <CardTitle>add new health metric</CardTitle>
+            <CardTitle>Add New Health Metric</CardTitle>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -184,7 +212,7 @@ export default function NewMetricPage() {
                   name="metricType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>metric type</FormLabel>
+                      <FormLabel>Metric type</FormLabel>
                       <Select
                         onValueChange={(value) => {
                           field.onChange(value);
@@ -192,9 +220,11 @@ export default function NewMetricPage() {
                         }}
                       >
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="select metric type" />
-                          </SelectTrigger>
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder="Select metric type"
+                          />
+                        </SelectTrigger>
                         </FormControl>
                         <SelectContent>
                           {Object.entries(metricOptions).map(([category, metrics]) => (
@@ -219,9 +249,9 @@ export default function NewMetricPage() {
                   name="value"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>value</FormLabel>
+                      <FormLabel>Value</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="enter value" {...field} />
+                        <Input type="number" placeholder="Enter metric value" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -233,11 +263,11 @@ export default function NewMetricPage() {
                   name="notes"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>notes (optional)</FormLabel>
+                      <FormLabel>Notes (optional)</FormLabel>
                       <FormControl>
                         <Input
                           type="text"
-                          placeholder="add any additional notes"
+                          placeholder="Add any additional notes"
                           {...field}
                         />
                       </FormControl>
@@ -247,7 +277,7 @@ export default function NewMetricPage() {
                 />
 
                 <Button type="submit" disabled={loading}>
-                  {loading ? "adding..." : "add metric"}
+                  {loading ? "Adding..." : "Add Metric"}
                 </Button>
               </form>
             </Form>
