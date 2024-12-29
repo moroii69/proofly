@@ -119,7 +119,7 @@ export const TeamSection = () => {
         <h2 className="text-lg text-primary tracking-wider mb-2">Our Team</h2>
         <h3 className="text-3xl md:text-4xl font-bold mb-4">Meet the Team Behind the Project</h3>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          We&apos;re a dedicated group of professionals working together to bring innovative solutions to document verification.
+          We&apos;re a committed team of professionals focused on delivering innovative and accurate solutions for health prediction.
         </p>
       </div>
 

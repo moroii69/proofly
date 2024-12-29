@@ -99,7 +99,6 @@ const getDisplayLabel = (value: string) => {
 };
 
 
-
 export default function NewMetricPage() {
   const { user } = useAuth();
   const router = useRouter();
@@ -243,20 +242,35 @@ export default function NewMetricPage() {
                     </FormItem>
                   )}
                 />
+<FormField
+  control={form.control}
+  name="value"
+  render={({ field }) => (
+              <FormItem>
+                <FormLabel>Value</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Enter metric value"
+                    {...field}
+                    onKeyPress={(e) => {
+                      if (e.key === '-' || e.key === '+') {
+                        e.preventDefault();
+                      }
+                    }}
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      if (parseFloat(target.value) < 0) {
+                        target.value = '';
+                      }
+                    }}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-                <FormField
-                  control={form.control}
-                  name="value"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Value</FormLabel>
-                      <FormControl>
-                        <Input type="number" placeholder="Enter metric value" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
 
                 <FormField
                   control={form.control}

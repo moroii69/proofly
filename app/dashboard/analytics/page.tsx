@@ -67,14 +67,14 @@ const MetricChart = ({ data, title, description }: MetricChartProps) => {
     const min = Math.min(...values);
     const max = Math.max(...values);
     const avg = parseFloat((values.reduce((a, b) => a + b, 0) / values.length).toFixed(1));
-    const lastRecordedValue = data.length > 0 ? data[data.length].value : 0;
+    const lastRecordedValue = data.length > 0 ? data[data.length - 1].value : 0;
     return { trend, min, max, avg, lastValue, lastRecordedValue };
   };
 
   const stats = calculateStats();
-  //get the last recorded value (previous method not working)
+  // get the last recorded value (previous method not working)
   // moved up 👇
-  // const lastRecordedValue = data.length > 0 ? data[data.length - 1].value : 0;
+  const lastRecordedValue = data.length > 0 ? data[data.length - 1].value : 0;
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
