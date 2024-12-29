@@ -59,7 +59,7 @@ export const TeamSection = () => {
         "https://i.imgur.com/xRYoAda.jpeg",
       firstName: "Mohd",
       lastName: "Abrar",
-      positions: ["Research and Marketing", "Quality Assurance"],
+      positions: ["Python Developer"],
       socialNetworks: [
         {
           name: "LinkedIn",
