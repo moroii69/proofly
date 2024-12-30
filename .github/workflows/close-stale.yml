@@ -1,0 +1,20 @@
+name: close stale issues and prs
+
+on:
+  schedule:
+    - cron: '0 0 */2 * *' # runs every 2 days
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: close stale issues
+        uses: actions/stale@v8
+        with:
+          days-before-stale: 15
+          days-before-close: 7
+          stale-issue-message: "this issue has been marked as stale due to inactivity. please update if you feel this is still relevant."
+          stale-pr-message: "this pull request has been marked as stale due to inactivity. please update if this is still relevant."
+          close-issue-message: "closing this issue as it has been inactive for an extended period."
+          close-pr-message: "closing this pull request as it has been inactive for an extended period."
