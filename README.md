@@ -1,6 +1,6 @@
 # Proofly
 
-![Version](https://img.shields.io/badge/version-1.1.2-blue)
+![Version](https://img.shields.io/badge/version-1.2.4-blue)
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)
@@ -51,18 +51,12 @@ Empowering individuals to manage chronic conditions with personalized health ins
 
 - [ ] **Reminders for Check-ups and Medications**  
   Automated reminders to ensure timely follow-ups and medication adherence.
-- [ ] **Multi-device Health Data Sync**  
+- [x] **Multi-device Health Data Sync**  
   Sync your health data across multiple devices seamlessly for a unified experience.
 - [x] **Advanced Analytics Dashboard**  
   Visualize and analyze trends in your health metrics with advanced analytics and predictive graphs.
-- [ ] **Integration with Wearable Devices**  
-  Integrate with fitness trackers and smartwatches for seamless data collection.
-- [ ] **AI-driven Health Insights**  
+- [x] **AI-driven Health Insights**  
   Receive tailored recommendations based on predictive models for a proactive health management strategy.
-- [ ] **Community Features**  
-  Connect with peers for motivation, advice, and support in managing chronic conditions.
-- [ ] **Machine Learning Prediction Backend**  
-  Enhance backend prediction algorithms using more advanced machine learning models to provide highly accurate health predictions.
 
 ### Live Demo
 
