@@ -9,8 +9,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../ui/sheet";
-import { Separator } from "../ui/separator";
+} from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,8 +18,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "../ui/navigation-menu";
-import { Button } from "../ui/button";
+} from "@/components/ui/navigation-menu";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ToggleTheme } from "./toogle-theme";
