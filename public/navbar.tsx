@@ -1,7 +1,6 @@
 "use client";
 import { ChevronsDown, Github, Menu } from "lucide-react";
 import React from "react";
-import { useTheme } from "next-themes";
 import {
   Sheet,
   SheetContent,
@@ -23,8 +22,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ToggleTheme } from "./toogle-theme";
-import faviconDark from "../../public/favicon.ico";
-import faviconLight from "../../public/favicon-l.ico";
+import favicon from '/public/favicon.ico';
 
 interface RouteProps {
   href: string;
@@ -35,41 +33,17 @@ const routeList: RouteProps[] = [];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const { theme } = useTheme();
-  
-  // Add mounted state to prevent hydration mismatch
-  const [mounted, setMounted] = React.useState(false);
-
-  // Update mounted state
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Prevent hydration mismatch by rendering a placeholder initially
-  if (!mounted) {
-    return (
-      <header className="shadow-inner bg-opacity-15 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center p-2 bg-card">
-        {/* Add minimal content to prevent layout shift */}
-        <div className="w-9 h-9" />
-      </header>
-    );
-  }
-
   return (
     <header className="shadow-inner bg-opacity-15 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center p-2 bg-card">
-      <Link href="/" className="font-bold text-lg flex items-center">
-        <Image
-          src={theme === 'dark' ? faviconDark : faviconLight}
-          alt="Proofly Icon"
-          width={36}
-          height={36}
-          className="bg-gradient-to-tr border-secondary from-primary via-primary/70 to-primary rounded-lg mr-2 border"
-        />
-        Proofly
-      </Link>
-      
-      {/* Rest of your Navbar code remains the same */}
-      {/* Mobile */}
+    <Link href="/" className="font-bold text-lg flex items-center">
+      <img
+        src={favicon.src}
+        alt="Proofly Icon"
+        className="bg-gradient-to-tr border-secondary from-primary via-primary/70 to-primary rounded-lg w-9 h-9 mr-2 border"
+      />
+      Proofly
+    </Link>
+      {/* <!-- Mobile --> */}
       <div className="flex items-center lg:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
@@ -110,18 +84,21 @@ export const Navbar = () => {
 
             <SheetFooter className="flex-col sm:flex-col justify-start items-start">
               <Separator className="mb-2" />
+
+              {/* Add Login and Signup Buttons */}
               <div className="flex gap-2 mb-4">
                 <Button asChild variant="default" size="sm">
                   <Link href="/sign-up">Sign Up</Link>
                 </Button>
               </div>
+
               <ToggleTheme />
             </SheetFooter>
           </SheetContent>
         </Sheet>
       </div>
 
-      {/* Desktop */}
+      {/* <!-- Desktop --> */}
       <NavigationMenu className="hidden lg:block mx-auto">
         <NavigationMenuList>
           <NavigationMenuItem>
