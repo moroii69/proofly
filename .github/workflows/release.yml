@@ -35,4 +35,4 @@ jobs:
         env:
           TWINE_USERNAME: ${{ secrets.GITHUB_ACTOR }}
           TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+        run: twine upload --repository-url https://upload.pypi.org/github/ dist/*
