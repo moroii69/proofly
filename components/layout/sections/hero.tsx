@@ -25,13 +25,14 @@ export const HeroSection = () => {
     <section className="min-h-screen w-full flex items-center justify-center relative">
       <div className="text-center space-y-8">
       <Badge variant="outline" className="text-sm py-2">
-        <span className="mr-2 text-primary">
-          <Badge>☕</Badge>
-        </span>
-        <a href="https://www.buymeacoffee.com/ufraaan" target="_blank" rel="noopener noreferrer">
-          Buy me a coffee
-        </a>
-      </Badge>
+  <span className="mr-2 text-primary">
+    <Badge className="font-normal">📦</Badge>
+  </span>
+  <a href="https://pypi.org/project/proofly/1.2.4/" target="_blank" rel="noopener noreferrer" className="font-normal">
+    Latest Release: v1.2.4
+    <span className="ml-2">→</span>
+  </a>
+</Badge>
 
         <div className="max-w-screen-md mx-auto text-center text-4xl md:text-6xl font-bold">
           <h1>

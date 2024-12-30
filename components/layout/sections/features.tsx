@@ -1,147 +1,97 @@
-import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Terminal, BookOpen, Code2, Database } from 'lucide-react';
+"use client";
+import { ArrowRight, Check, Copy } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
-const PythonPackageSection = () => {
+const InstallationGuide = () => {
+  interface CopyToClipboardProps {
+    text: string;
+  }
+
+  const copyToClipboard = (text: CopyToClipboardProps['text']): void => {
+    navigator.clipboard.writeText(text);
+  };
+
   return (
-    <section className="container max-w-4xl mx-auto py-12 px-4 sm:px-6">
-      <div className="text-center mb-12">
-        <h2 className="text-lg text-primary tracking-wider mb-2">
-          Installation
-        </h2>
-        <h3 className="text-3xl md:text-4xl font-bold mb-4">
-          Get Started with Proofly
-        </h3>
-        <p className="mx-auto text-xl text-muted-foreground mb-4">
-          A powerful Python package for AI-driven health predictions
-        </p>
-        <a 
-          href="https://pypi.org/project/proofly/1.1.2/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-primary hover:underline mb-8"
-        >
-          Latest version: 1.1.2
-        </a>
-      </div>
-
-      <div className="grid gap-6">
-        {/* Prerequisites */}
-        <Card>
-          <CardHeader className="flex flex-row items-center gap-2">
-            <Database className="h-6 w-6 text-primary" />
-            <CardTitle>Prerequisites</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2 list-disc pl-4 text-sm sm:text-base">
-              <li>Python 3.8 or higher</li>
-              <li>pip package manager</li>
-              <li>Virtual environment (recommended)</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        {/* Installation */}
-        <Card>
-          <CardHeader className="flex flex-row items-center gap-2">
-            <Terminal className="h-6 w-6 text-primary" />
-            <CardTitle>Quick Install</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <code className="font-mono bg-muted p-3 rounded block overflow-x-auto text-sm sm:text-base">
-              pip install proofly==1.1.2
-            </code>
-          </CardContent>
-        </Card>
-
-        {/* Basic Usage */}
-        <Card>
-          <CardHeader className="flex flex-row items-center gap-2">
-            <Code2 className="h-6 w-6 text-primary" />
-            <CardTitle>Basic Usage</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <pre className="font-mono bg-muted p-3 rounded overflow-x-auto text-sm sm:text-base">
-              <code>
-                <span className="text-purple-500">from</span>{" "}
-                <span className="text-blue-500">proofly</span>{" "}
-                <span className="text-purple-500">import</span>{" "}
-                <span className="text-green-500">HealthAnalyzer</span>
-                {"\n"}
-                <span className="text-purple-500">from</span>{" "}
-                <span className="text-blue-500">proofly.models</span>{" "}
-                <span className="text-purple-500">import</span>{" "}
-                <span className="text-green-500">DiabetesMetrics</span>
-                {"\n"}
-                <span className="text-purple-500">from</span>{" "}
-                <span className="text-blue-500">datetime</span>{" "}
-                <span className="text-purple-500">import</span>{" "}
-                <span className="text-green-500">datetime</span>
-                {"\n\n"}
-                <span className="text-gray-500"># Initialize the analyzer</span>{"\n"}
-                <span className="text-blue-500">analyzer</span>{" "}
-                <span className="text-orange-500">=</span>{" "}
-                <span className="text-green-500">HealthAnalyzer</span>(
-                {"\n    "}
-                <span className="text-blue-500">config</span>
-                <span className="text-orange-500">=</span>
-                {"{"}
-                {"\n        "}
-                <span className="text-yellow-500">&quot;logging_level&quot;</span>
-                <span className="text-orange-500">:</span>{" "}
-                <span className="text-yellow-500">&quot;INFO&quot;</span>,
-                {"\n        "}
-                <span className="text-yellow-500">&quot;cache_enabled&quot;</span>
-                <span className="text-orange-500">:</span>{" "}
-                <span className="text-purple-500">True</span>,
-                {"\n        "}
-                <span className="text-yellow-500">&quot;validation_mode&quot;</span>
-                <span className="text-orange-500">:</span>{" "}
-                <span className="text-yellow-500">&quot;strict&quot;</span>
-                {"\n    "}
-                {"}"}{"\n"}){"\n\n"}
-                <span className="text-gray-500"># Create metrics using the type-safe model</span>{"\n"}
-                <span className="text-blue-500">metrics</span>{" "}
-                <span className="text-orange-500">=</span>{" "}
-                <span className="text-green-500">DiabetesMetrics</span>(
-                {"\n    "}
-                <span className="text-blue-500">blood_glucose</span>
-                <span className="text-orange-500">=</span>
-                <span className="text-purple-500">120</span>,
-                {"\n    "}
-                <span className="text-blue-500">hba1c</span>
-                <span className="text-orange-500">=</span>
-                <span className="text-purple-500">6.5</span>,
-                {"\n    "}
-                <span className="text-blue-500">blood_pressure</span>
-                <span className="text-orange-500">=</span>
-                <span className="text-purple-500">130</span>,
-                {"\n    "}
-                <span className="text-blue-500">timestamp</span>
-                <span className="text-orange-500">=</span>
-                <span className="text-green-500">datetime</span>.
-                <span className="text-blue-500">now</span>()
-                {"\n"})
-              </code>
-            </pre>
-          </CardContent>
-        </Card>
-
-        {/* Documentation Link */}
-        <div className="text-center mt-6">
-          <a 
-            href="https://pypi.org/project/proofly/1.1.2/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-primary hover:underline"
-          >
-            <BookOpen className="h-5 w-5" />
-            View Full Documentation
-          </a>
+    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background p-4">
+      <div className="container max-w-5xl space-y-4">
+        <div className="text-center space-y-2">
+          <p className="text-sm font-semibold uppercase tracking-wide text-primary">
+            Python Package
+          </p>
+          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+            Proofly Health Analytics
+          </h1>
+          <p className="mx-auto max-w-xl text-muted-foreground">
+          A powerful toolkit to analyze and track your health data for better insights and decision-making          </p>
         </div>
+        
+        <Card className="mt-8">
+          <CardContent className="flex flex-col gap-8 p-6 md:flex-row lg:p-8">
+            <div className="w-full space-y-4">
+              <div className="space-y-2">
+                <h2 className="text-2xl font-bold tracking-tight">
+                  Quick Installation
+                </h2>
+                <p className="text-muted-foreground">
+                  Start analyzing health metrics in minutes
+                </p>
+              </div>
+
+              <div className="relative rounded-md bg-muted p-4">
+                <div className="flex items-center justify-between">
+                  <code className="text-sm font-mono">pip install proofly==1.2.4</code>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={() => copyToClipboard("pip install proofly==1.1.2")}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <Button 
+                variant="link" 
+                className="p-0"
+                onClick={() => window.open('https://proofly-docs-site.vercel.app/', '_blank')}
+              >
+                Explore Documentation <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+
+            <div className="w-full space-y-4">
+              <h3 className="font-semibold">System Requirements</h3>
+              <ul className="space-y-3">
+                <li className="flex items-center">
+                  <Check className="mr-3 h-5 w-5 text-primary" />
+                  <span>Python 3.8+ (64-bit recommended)</span>
+                </li>
+                <li className="flex items-center">
+                  <Check className="mr-3 h-5 w-5 text-primary" />
+                  <span>pip 20.0+ package manager</span>
+                </li>
+                <li className="flex items-center">
+                  <Check className="mr-3 h-5 w-5 text-primary" />
+                  <span>2GB available RAM</span>
+                </li>
+                <li className="flex items-center">
+                  <Check className="mr-3 h-5 w-5 text-primary" />
+                  <span>Virtual environment (recommended)</span>
+                </li>
+              </ul>
+
+              <div className="rounded-md bg-primary/10 p-4">
+                <p className="text-sm text-primary">
+                  For production deployments, we recommend using Python 3.10+ for optimal performance.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default PythonPackageSection;
+export default InstallationGuide;
