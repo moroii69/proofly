@@ -62,7 +62,7 @@ export const HeroSection = () => {
             variant="secondary"
             className="w-5/6 md:w-1/4 font-bold"
           >
-            <Link href="/team">Meet the Team</Link>
+            <Link href="https://proofly-docs-site.vercel.app/" target="_blank">View Docs</Link>
           </Button>
         </div>
       </div>

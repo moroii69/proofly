@@ -111,6 +111,9 @@ export const Navbar = () => {
                 <Button asChild variant="default" size="sm">
                   <Link href="/sign-up">Sign Up</Link>
                 </Button>
+                <Button asChild variant="ghost" size="sm">
+                  <Link href="/team">Team</Link>
+                </Button>
               </div>
               <ToggleTheme />
             </SheetFooter>
@@ -135,6 +138,10 @@ export const Navbar = () => {
       <div className="hidden lg:flex items-center gap-4">
         <Button asChild variant="default" size="sm">
           <Link href="/sign-up">Sign Up</Link>
+        </Button>
+
+        <Button asChild variant="ghost" size="sm">
+          <Link href="/team">Team</Link>
         </Button>
 
         <ToggleTheme />
