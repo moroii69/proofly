@@ -25,7 +25,7 @@ export const TeamSection = () => {
       imageUrl: "https://i.imgur.com/wPdloI2.jpeg",
       firstName: "Mohammed",
       lastName: "Ufraan",
-      positions: ["Project Lead", "Machine Learning Engineer"],
+      positions: ["Project Lead", "NextJS Developer"],
       socialNetworks: [
         {
           name: "LinkedIn",
@@ -67,7 +67,7 @@ export const TeamSection = () => {
         },
         {
           name: "Github",
-          url: "https://github.com/abrarr",
+          url: "https://github.com/Abrarr12",
         },
       ],
     },
