@@ -54,7 +54,7 @@ const InstallationGuide = () => {
               <Button 
                 variant="link" 
                 className="p-0"
-                onClick={() => window.open('https://proofly-docs-site.vercel.app/', '_blank')}
+                onClick={() => window.open('https://docs.proofly.xyz/', '_blank')}
               >
                 Explore Documentation <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

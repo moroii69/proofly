@@ -231,7 +231,7 @@ This is a personal project. If you have suggestions or would like to contribute,
 ## Documentation
 
 For complete documentation, visit:
-[proofly documentation](https://proofly-docs-site.vercel.app)
+[proofly documentation](https://docs.proofly.xyz/)
 
 ## Support
 
