@@ -141,7 +141,7 @@ export const Navbar = () => {
         </Button>
 
         <Button asChild variant="ghost" size="sm">
-          <Link href="/team">Team</Link>
+          <Link href="/login">Login</Link>
         </Button>
 
         <ToggleTheme />
