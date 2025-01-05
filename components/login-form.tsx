@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,14 +22,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
-// Zod schema for form validation
 const loginSchema = z.object({
-  email: z.string().email("Invalid email address"),
+  email: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
@@ -71,8 +72,8 @@ export function LoginForm({
       await signInWithPopup(auth, provider);
 
       toast({
-        title: "✅ Success",
-        description: "Signed in with Google successfully!",
+        title: "Welcome back!",
+        description: "Signed in with Google successfully",
         variant: "default",
       });
 
@@ -84,15 +85,14 @@ export function LoginForm({
     }
   };
 
-  // Submit handler for regular email/password login
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
 
       toast({
-        title: "✅ Success",
-        description: "Signed in successfully! Welcome back.",
+        title: "Welcome back!",
+        description: "Signed in successfully",
         variant: "default",
       });
 
@@ -108,15 +108,23 @@ export function LoginForm({
     }
   }
 
-  // Forgot password handler
   const handleForgotPassword = async (email: string) => {
+    if (!email) {
+      toast({
+        title: "Error",
+        description: "Please enter your email address first",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
       await sendPasswordResetEmail(auth, email);
 
       toast({
-        title: "Success",
-        description: "Password reset link sent. Check your email.",
+        title: "Check your inbox",
+        description: "Password reset link has been sent to your email",
         variant: "default",
       });
     } catch (error: any) {
@@ -131,51 +139,63 @@ export function LoginForm({
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>Login with your Google account</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <div className="grid gap-6">
-              {/* Google Sign-in Button */}
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={handleGoogleSignIn}
-                disabled={loading}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12">
+      <div className={cn("w-full max-w-md space-y-8", className)} {...props}>
+        <Card className="border-2">
+          <CardHeader className="space-y-2 text-center">
+            <CardTitle className="text-2xl font-bold tracking-tight">Welcome back</CardTitle>
+            <CardDescription className="text-base">
+              Sign in to your account to continue
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="space-y-6">
+            <Button
+              variant="outline"
+              className="w-full h-11 relative hover:border-primary/50 hover:bg-primary/5"
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                   <path
                     d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
                     fill="currentColor"
                   />
                 </svg>
-                Login with Google
-              </Button>
+              )}
+              Continue with Google
+            </Button>
 
-              {/* Or continue with email/password */}
-              <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                  Or continue with
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  Or continue with email
                 </span>
               </div>
+            </div>
 
-              {/* Email and Password Fields */}
-              <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email" className="text-sm font-medium">
+                        Email address
+                      </Label>
                       <FormControl>
                         <Input
                           id="email"
                           type="email"
-                          placeholder="m@example.com"
+                          placeholder="name@example.com"
+                          className="h-11"
                           {...field}
                         />
                       </FormControl>
@@ -189,53 +209,81 @@ export function LoginForm({
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <div className="flex items-center">
-                        <Label htmlFor="password">Password</Label>
-                        <a
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleForgotPassword(form.getValues("email"));
-                          }}
-                          className="ml-auto text-sm underline-offset-4 hover:underline"
+                      <div className="flex items-center justify-between">
+                        <Label htmlFor="password" className="text-sm font-medium">
+                          Password
+                        </Label>
+                        <button
+                          type="button"
+                          onClick={() => handleForgotPassword(form.getValues("email"))}
+                          className="text-sm text-primary hover:text-primary/80 transition-colors"
                         >
-                          Forgot your password?
-                        </a>
+                          Forgot password?
+                        </button>
                       </div>
                       <FormControl>
-                        <Input id="password" type="password" {...field} />
+                        <Input
+                          id="password"
+                          type="password"
+                          className="h-11"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Signing in..." : "Login"}
+                <Button
+                  type="submit"
+                  className="w-full h-11 text-base font-medium"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Signing in...
+                    </>
+                  ) : (
+                    "Sign in"
+                  )}
                 </Button>
               </form>
+            </Form>
+          </CardContent>
 
-              {/* Sign-up Link */}
-              <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <a href="/sign-up" className="underline underline-offset-4">
-                  Sign up
-                </a>
-              </div>
-            </div>
-          </Form>
-        </CardContent>
-      </Card>
+          <CardFooter className="flex flex-col space-y-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              Don't have an account?{" "}
+              <a
+                href="/sign-up"
+                className="text-primary hover:text-primary/80 transition-colors font-medium"
+              >
+                Sign up
+              </a>
+            </p>
 
-      {/* Go Back Button */}
-      <Button variant="link" onClick={() => router.push("/")} className="w-full mt-4">
-        Go back to Home
-      </Button>
+            <Button
+              variant="ghost"
+              onClick={() => router.push("/")}
+              className="text-sm text-muted-foreground hover:text-foreground"
+            >
+              Return to home
+            </Button>
 
-      {/* Terms of Service and Privacy Policy */}
-      <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a> and{" "}
-        <a href="#">Privacy Policy</a>.
+            <p className="text-xs text-muted-foreground px-6">
+              By continuing, you agree to our{" "}
+              <a href="#" className="underline hover:text-foreground">
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a href="#" className="underline hover:text-foreground">
+                Privacy Policy
+              </a>
+              .
+            </p>
+          </CardFooter>
+        </Card>
       </div>
     </div>
   );

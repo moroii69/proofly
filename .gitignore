@@ -39,3 +39,6 @@ next-env.d.ts
 
 #python package dist folder 
 /dist/
+
+#vscode
+/.vscode
