@@ -39,7 +39,7 @@ export const FooterSection = () => {
           <div className="flex flex-col gap-2">
             <h3 className="font-bold text-lg">Help</h3>
             <div>
-              <Link href="mailto:support@proofly.xyz" target="_blank" className="opacity-60 hover:opacity-100">
+              <Link href="/contact" target="_blank" className="opacity-60 hover:opacity-100">
                 Contact Us
               </Link>
             </div>

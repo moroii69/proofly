@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Mail, Send, Github, Globe, Server, Activity, CheckCircle, AlertCircle, Gauge, Database, Cloud, Bot } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { FooterSection } from "@/components/layout/sections/footer"
 
 interface ContactFormData {
   name: string;
@@ -275,8 +276,10 @@ const ContactPage = () => {
           </CardContent>
         </Card>
       </div>
+        <FooterSection />
     </div>
   );
 };
+
 
 export default ContactPage;

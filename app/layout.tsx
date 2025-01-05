@@ -21,7 +21,7 @@ export default function RootLayout({
 
   // Define the pages where the Navbar should be visible
   const showNavbar =
-    pathname === "/" || pathname === "/team" || pathname === "/sign-up" || pathname === "/login";
+    pathname === "/" || pathname === "/team" || pathname === "/sign-up" || pathname === "/login" || pathname === "/contact";
 
   return (
     <html lang="en" suppressHydrationWarning>
