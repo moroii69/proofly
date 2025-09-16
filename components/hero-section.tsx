@@ -14,14 +14,19 @@ const HeroSection = () => {
                                 Empower Your Health with AI Predictions
                             </h1>
                             <p className="mx-auto max-w-screen-md text-lg lg:text-xl text-muted-foreground">
-                                Leverage advanced AI to predict, prevent, and protect your health. Stay ahead with personalized insights and real-time monitoring.
+                                Leverage advanced AI to predict, prevent, and
+                                protect your health. Stay ahead with
+                                personalized insights and real-time monitoring.
                             </p>
                             <div className="mt-12 flex w-full flex-col justify-center gap-2 sm:flex-row">
                                 <Button className="bg-primary text-white hover:bg-secondary transition-all">
                                     Start your health journey
                                     <ChevronRight className="ml-2 h-4" />
                                 </Button>
-                                <Button variant="ghost" className="text-white hover:text-primary transition-all">
+                                <Button
+                                    variant="ghost"
+                                    className="text-white hover:text-primary transition-all"
+                                >
                                     Learn more
                                     <ChevronRight className="ml-2 h-4" />
                                 </Button>
@@ -41,7 +46,7 @@ const HeroSection = () => {
                                 "#000000", // Black
                                 "#FFFFFF", // White
                                 "#FFAFAF", // Light pinkish red
-                                "#FFC7C7"  // Soft pastel red
+                                "#FFC7C7", // Soft pastel red
                             ]}
                             borderRadius={8} // Border radius
                             borderWidth={2} // Border width

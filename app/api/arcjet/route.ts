@@ -2,33 +2,33 @@ import arcjet, { shield } from "@arcjet/next";
 import { NextResponse } from "next/server";
 
 const aj = arcjet({
-  key: process.env.ARCJET_KEY!,
-  rules: [
-    shield({
-      mode: "DRY_RUN",
-    }),
-  ],
+    key: process.env.ARCJET_KEY!,
+    rules: [
+        shield({
+            mode: "DRY_RUN",
+        }),
+    ],
 });
 
 export async function GET(req: Request) {
-  const decision = await aj.protect(req);
+    const decision = await aj.protect(req);
 
-  for (const result of decision.results) {
-    console.log("Rule Result", result);
-  }
+    for (const result of decision.results) {
+        console.log("Rule Result", result);
+    }
 
-  console.log("Conclusion", decision.conclusion);
+    console.log("Conclusion", decision.conclusion);
 
-  if (decision.isDenied() && decision.reason.isShield()) {
-    return NextResponse.json(
-      {
-        error: "You are suspicious!",
-      },
-      { status: 403 },
-    );
-  }
+    if (decision.isDenied() && decision.reason.isShield()) {
+        return NextResponse.json(
+            {
+                error: "You are suspicious!",
+            },
+            { status: 403 }
+        );
+    }
 
-  return NextResponse.json({
-    message: "Hello world",
-  });
+    return NextResponse.json({
+        message: "Hello world",
+    });
 }
